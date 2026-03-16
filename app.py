@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session, url_for
 from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from model.users import Users
 from model.users import db
+import os
 
 from form import RegisterForm
 
@@ -11,7 +12,9 @@ app.config["SECRET_KEY"] = "your_secret_key_here"
 # app.config["SQLALCHEMY_DATABASE_URI"] = (
 #     "postgresql://upasanaporwal@localhost/upasanaporwal"
 # )
+
 db_url = os.environ.get("DATABASE_URL")
+
 if db_url and db_url.startswith("postgres://"):
     db_url = db_url.replace("postgres://", "postgresql://", 1)
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url
